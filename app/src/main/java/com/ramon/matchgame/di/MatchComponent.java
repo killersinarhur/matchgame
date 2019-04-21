@@ -2,6 +2,8 @@ package com.ramon.matchgame.di;
 
 
 
+import com.ramon.matchgame.startgame.StartGamePresenter;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -10,4 +12,5 @@ import dagger.Component;
 @Component(modules = {MatchModule.class})
 public interface MatchComponent {
 
+    void inject(StartGamePresenter startGameActivity);
 }

@@ -1,6 +1,7 @@
 package com.ramon.matchgame.webservice.flicker;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.ramon.matchgame.webservice.flicker.callback.PhotoCallBack;
 import com.ramon.matchgame.webservice.flicker.callback.PhotoSizeCallback;
@@ -25,37 +26,41 @@ public class FlickerClient {
         this.client = client;
     }
 
-    public void getPhotos(PhotoCallBack callBack, String tag) {
-        client.getRecentPhotos(RECENT_PHOTO_METHOD, API_KEY, RESPONSE_FORMAT, tag).enqueue(new Callback<FlikerResults>() {
+    public void getPhotos(PhotoCallBack callBack, int results) {
+        client.getRecentPhotos(RECENT_PHOTO_METHOD, API_KEY, RESPONSE_FORMAT,1, results).enqueue(new Callback<FlikerResults>() {
             @Override
             public void onResponse(Call<FlikerResults> call, Response<FlikerResults> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().getStat().equals("ok")) {
                     callBack.onPhotosSuccess(response.body());
                 } else {
                     callBack.onPhotosFailure(response.code(), response.message());
+                    Log.d(RECENT_PHOTO_METHOD,response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<FlikerResults> call, Throwable t) {
+                t.printStackTrace();
                 callBack.onPhotosFailure(-1, t.getMessage());
             }
         });
     }
 
     public void getPhotoSizes(PhotoSizeCallback callback, String photoId) {
-        client.getImageSizes(PHOTO_SIZE_METHOD, API_KEY, RESPONSE_FORMAT, photoId).enqueue(new Callback<ImageSizeResult>() {
+        client.getImageSizes(PHOTO_SIZE_METHOD, API_KEY, RESPONSE_FORMAT, 1,photoId).enqueue(new Callback<ImageSizeResult>() {
             @Override
             public void onResponse(Call<ImageSizeResult> call, Response<ImageSizeResult> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().getStat().equals("ok")) {
                     callback.onImageSizeSuccess(response.body());
                 } else {
                     callback.onImageSizeFailure(response.code(), response.message());
+                    Log.d(PHOTO_SIZE_METHOD,response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ImageSizeResult> call, Throwable t) {
+                t.printStackTrace();
                 callback.onImageSizeFailure(-1, t.getMessage());
             }
         });
