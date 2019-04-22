@@ -1,5 +1,7 @@
 package com.ramon.matchgame.startgame;
 
+import android.os.Bundle;
+
 import com.google.gson.Gson;
 import com.ramon.matchgame.BaseApplication;
 import com.ramon.matchgame.webservice.flicker.FlickerClient;
@@ -59,6 +61,14 @@ public class StartGamePresenter implements PhotoCallBack {
     public void onPhotosFailure(int code, String message) {
         view.hideProgressDialog();
         view.showErrorState();
+    }
+
+    public Bundle saveInstanceState(Bundle outState) {
+        return model.saveInstance(outState);
+    }
+
+    public void restoreState(Bundle savedInstanceState) {
+        model.restoreState(savedInstanceState);
     }
 
     public interface View{

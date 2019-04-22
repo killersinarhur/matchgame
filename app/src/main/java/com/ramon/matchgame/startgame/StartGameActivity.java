@@ -32,8 +32,13 @@ public class StartGameActivity extends AppCompatActivity implements StartGamePre
         setContentView(R.layout.activity_start_game);
         ButterKnife.bind(this);
         presenter= new StartGamePresenter(this,new StartGameModel());
-        presenter.viewCreated();
         dialog=initDialog();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.viewCreated();
     }
 
     private ProgressDialog initDialog() {
@@ -99,8 +104,17 @@ public class StartGameActivity extends AppCompatActivity implements StartGamePre
     @Override
     public void showErrorState() {
         Toast.makeText(this,"error",Toast.LENGTH_LONG).show();
-
-
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+       outState= presenter.saveInstanceState(outState);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        presenter.restoreState(savedInstanceState);
+    }
 }

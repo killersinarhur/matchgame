@@ -1,7 +1,10 @@
 package com.ramon.matchgame.startgame;
 
-public class StartGameModel {
+import android.os.Bundle;
 
+public class StartGameModel {
+    public static final String NUMS_KEY="START_NUMS_KEY";
+    public static final String BOARD_KEY="START_BOARD_KEY";
     private int numOfImages = UniqueImages.SMALL;
     private double boardSize = 4;
 
@@ -34,6 +37,17 @@ public class StartGameModel {
         }
 
         setNumOfImages(result);
+    }
+
+    public Bundle saveInstance(Bundle outState) {
+        outState.putInt(NUMS_KEY,numOfImages);
+        outState.putInt(BOARD_KEY,(int)boardSize);
+        return outState;
+    }
+
+    public void restoreState(Bundle savedInstanceState) {
+        numOfImages=savedInstanceState.getInt(NUMS_KEY);
+        boardSize=savedInstanceState.getInt(BOARD_KEY);
     }
 
 
