@@ -4,8 +4,20 @@ import android.os.Bundle;
 
 import com.ramon.matchgame.BundleKeys;
 
+import java.util.Random;
+
 public class StartGameModel {
 
+    public int getPageNumber() {
+        Random random= new Random();
+        return random.nextInt(pageNumber);
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public int pageNumber;
     private int numOfImages = UniqueImages.SMALL;
     private double boardSize = 4;
 

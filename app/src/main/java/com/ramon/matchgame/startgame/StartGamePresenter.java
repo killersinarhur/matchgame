@@ -48,12 +48,13 @@ public class StartGamePresenter implements PhotoCallBack {
 
      void serviceCallStarted() {
         view.showProgressDialog();
-        flickerClient.getPhotos(this,model.getNumOfImages(),"kitten");
+        flickerClient.getPhotos(this,model.getNumOfImages(),"kitten",model.pageNumber);
     }
 
     @Override
     public void onPhotosSuccess(FlikerResults flikerResults) {
         view.hideProgressDialog();
+        model.setPageNumber(flikerResults.getPhotos().getPages());
         view.launchGame(gson.toJson(flikerResults),model.getNumOfImages(),(int)model.getBoardSize());
     }
 

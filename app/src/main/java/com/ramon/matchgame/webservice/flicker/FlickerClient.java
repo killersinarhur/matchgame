@@ -26,7 +26,7 @@ public class FlickerClient {
         this.client = client;
     }
 
-    public void getPhotos(PhotoCallBack callBack, int results,String tag) {
+    public void getPhotos(PhotoCallBack callBack, int results,String tag,int page) {
         client.getPhotos(RECENT_PHOTO_METHOD, API_KEY, RESPONSE_FORMAT,1, results,tag,1,1,1).enqueue(new Callback<FlikerResults>() {
             @Override
             public void onResponse(Call<FlikerResults> call, Response<FlikerResults> response) {
