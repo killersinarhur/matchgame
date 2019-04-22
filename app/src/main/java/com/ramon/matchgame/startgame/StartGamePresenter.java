@@ -48,7 +48,7 @@ public class StartGamePresenter implements PhotoCallBack {
 
      void serviceCallStarted() {
         view.showProgressDialog();
-        flickerClient.getPhotos(this,model.getNumOfImages());
+        flickerClient.getPhotos(this,model.getNumOfImages(),"kitten");
     }
 
     @Override

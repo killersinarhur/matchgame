@@ -13,7 +13,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FlickerClient {
-    private static final String RECENT_PHOTO_METHOD = "flickr.photos.getRecent";
+    private static final String RECENT_PHOTO_METHOD = "flickr.photos.search";
     private static final String PHOTO_SIZE_METHOD = "flickr.photos.getSizes";
     private static final String RESPONSE_FORMAT = "json";
     private static final String API_KEY = "5423dbab63f23a62ca4a986e7cbb35e2";
@@ -26,8 +26,8 @@ public class FlickerClient {
         this.client = client;
     }
 
-    public void getPhotos(PhotoCallBack callBack, int results) {
-        client.getRecentPhotos(RECENT_PHOTO_METHOD, API_KEY, RESPONSE_FORMAT,1, results).enqueue(new Callback<FlikerResults>() {
+    public void getPhotos(PhotoCallBack callBack, int results,String tag) {
+        client.getPhotos(RECENT_PHOTO_METHOD, API_KEY, RESPONSE_FORMAT,1, results,tag,1,1,1).enqueue(new Callback<FlikerResults>() {
             @Override
             public void onResponse(Call<FlikerResults> call, Response<FlikerResults> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().getStat().equals("ok")) {
