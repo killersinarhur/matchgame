@@ -1,5 +1,6 @@
 package com.ramon.matchgame.actualgame;
 
+import android.os.PersistableBundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.ramon.matchgame.BundleKeys;
 import com.ramon.matchgame.R;
 import com.ramon.matchgame.actualgame.gameviewholder.GameBoardAdapter;
 import com.ramon.matchgame.webservice.flicker.model.Photo;
@@ -17,9 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MatchingActivity extends AppCompatActivity implements MatchingPresenter.View {
-    public static final String FLICKER_RESULTS_KEY = "FLICKER_RESULTS_KEY";
-    public static final String NUMBER_OF_IMAGES_KEY = "NUMBER_OF_IMAGES_KEY";
-    public static final String BOARD_SIZE_KEY = "BOARD_SIZE_KEY";
+
     private MatchingPresenter presenter;
     @BindView(R.id.move_counter)
     TextView moveTracker;
@@ -33,9 +33,14 @@ public class MatchingActivity extends AppCompatActivity implements MatchingPrese
         setContentView(R.layout.activity_matching);
         ButterKnife.bind(this);
         presenter = new MatchingPresenter(this, getIntent());
-        presenter.onViewCreated();
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onViewCreated();
+    }
 
     @Override
     public void incrementMoveCounter(int numOfMoves) {
@@ -61,5 +66,19 @@ public class MatchingActivity extends AppCompatActivity implements MatchingPrese
         alertDialog.show();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(BundleKeys.RV_KEY,gameBoard.getLayoutManager().onSaveInstanceState());
+        outState=presenter.saveState(outState);
+        super.onSaveInstanceState(outState);
+    }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState!=null){
+            gameBoard.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable(BundleKeys.RV_KEY));
+            presenter.restoreState(savedInstanceState);
+        }
+    }
 }

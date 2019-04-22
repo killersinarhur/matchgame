@@ -19,34 +19,34 @@ public class StartGamePresenter implements PhotoCallBack {
     private StartGameModel model;
     private View view;
 
-    public StartGamePresenter(View view, StartGameModel model) {
+     StartGamePresenter(View view, StartGameModel model) {
         this.view= view;
         this.model=model;
         BaseApplication.getDaggerComponent().inject(this);
     }
 
 
-    public void decreaseBoardSize() {
+     void decreaseBoardSize() {
         model.decreaseSize();
         view.updateBoardSize(model.getNumOfImages(),model.getBoardSize());
         view.toggleDecrease(!(model.getNumOfImages()== StartGameModel.UniqueImages.SMALL));
         view.toggleIncrease(!(model.getNumOfImages()== StartGameModel.UniqueImages.LARGE));
     }
 
-    public void increaseBoardSize() {
+     void increaseBoardSize() {
         model.increaseSize();
         view.updateBoardSize(model.getNumOfImages(),model.getBoardSize());
         view.toggleDecrease(!(model.getNumOfImages()== StartGameModel.UniqueImages.SMALL));
         view.toggleIncrease(!(model.getNumOfImages()== StartGameModel.UniqueImages.LARGE));
     }
 
-    public void viewCreated() {
+     void viewCreated() {
         view.updateBoardSize(model.getNumOfImages(),model.getBoardSize());
         view.toggleDecrease(false);
 
     }
 
-    public void serviceCallStarted() {
+     void serviceCallStarted() {
         view.showProgressDialog();
         flickerClient.getPhotos(this,model.getNumOfImages());
     }
@@ -63,11 +63,11 @@ public class StartGamePresenter implements PhotoCallBack {
         view.showErrorState();
     }
 
-    public Bundle saveInstanceState(Bundle outState) {
+     Bundle saveInstanceState(Bundle outState) {
         return model.saveInstance(outState);
     }
 
-    public void restoreState(Bundle savedInstanceState) {
+     void restoreState(Bundle savedInstanceState) {
         model.restoreState(savedInstanceState);
     }
 

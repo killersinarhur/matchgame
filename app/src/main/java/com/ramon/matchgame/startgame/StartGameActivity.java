@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ramon.matchgame.BundleKeys;
 import com.ramon.matchgame.R;
 import com.ramon.matchgame.actualgame.MatchingActivity;
 
@@ -95,9 +96,9 @@ public class StartGameActivity extends AppCompatActivity implements StartGamePre
     @Override
     public void launchGame(String flikerResults, int numOfImages, int boardSize) {
         Intent intent= new Intent(this, MatchingActivity.class);
-        intent.putExtra(MatchingActivity.FLICKER_RESULTS_KEY,flikerResults);
-        intent.putExtra(MatchingActivity.NUMBER_OF_IMAGES_KEY,numOfImages);
-        intent.putExtra(MatchingActivity.BOARD_SIZE_KEY,boardSize);
+        intent.putExtra(BundleKeys.FLICKER_RESULTS_KEY,flikerResults);
+        intent.putExtra(BundleKeys.NUMBER_OF_IMAGES_KEY,numOfImages);
+        intent.putExtra(BundleKeys.BOARD_SIZE_KEY,boardSize);
         startActivity(intent);
     }
 

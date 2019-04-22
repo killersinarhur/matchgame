@@ -1,6 +1,7 @@
 package com.ramon.matchgame.actualgame;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.google.gson.Gson;
 import com.ramon.matchgame.BaseApplication;
@@ -18,7 +19,7 @@ public class MatchingPresenter {
     @Inject
     Gson gson;
 
-    public MatchingPresenter(View view, Intent intent) {
+     MatchingPresenter(View view, Intent intent) {
         BaseApplication.getDaggerComponent().inject(this);
         this.view = view;
         this.model = new MatchingModel(intent, gson);
@@ -29,7 +30,7 @@ public class MatchingPresenter {
         view.incrementMoveCounter(model.getNumOfMoves());
     }
 
-    public void onViewCreated() {
+     void onViewCreated() {
 
         view.initializeView(model.getBoardSize(),model.getPhotoList(),model.getNumOfMoves());
     }
@@ -39,6 +40,14 @@ public class MatchingPresenter {
         if (model.getNumofImages()==model.getNumOfMatchesMade()){
             view.showGameWon(model.getNumOfMoves());
         }
+    }
+
+     Bundle saveState(Bundle outState) {
+        return model.saveInstace(outState);
+    }
+
+    void restoreState(Bundle restoreState){
+         model.restoreInstance(restoreState);
     }
 
     public interface View {
