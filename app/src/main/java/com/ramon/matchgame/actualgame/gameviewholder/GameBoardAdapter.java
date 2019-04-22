@@ -52,8 +52,10 @@ public class GameBoardAdapter extends RecyclerView.Adapter {
               matched[position]=true;
               presenter.matchMade();
           }
-          selected=null;
+          selected=position;
+
       }
+
       presenter.moveMade();
       notifyDataSetChanged();
     };

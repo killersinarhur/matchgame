@@ -17,7 +17,8 @@ public interface FlickerApi {
                                   @Query("tags") String tag,
                                   @Query("privacy_filter") int filter,
                                   @Query("safe_search") int safeSearch,
-                                  @Query("content_type")int contentType);
+                                  @Query("content_type")int contentType,
+                                  @Query("page")int page);
 
     @GET("services/rest/")
     Call<ImageSizeResult> getImageSizes(@Query("method") String method,

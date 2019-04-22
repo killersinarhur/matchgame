@@ -8,4 +8,5 @@
     <string name="moveTracker">Move Number: %1$d</string>
     <string name="winningMessage">YOU WON IN %1$d moves</string>
     <string name="new_game">New Game</string>
+    <string name="start_game">Start Game</string>
 </resources>
