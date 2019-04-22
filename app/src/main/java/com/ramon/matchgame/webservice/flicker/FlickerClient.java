@@ -16,7 +16,7 @@ public class FlickerClient {
     private static final String RECENT_PHOTO_METHOD = "flickr.photos.search";
     private static final String PHOTO_SIZE_METHOD = "flickr.photos.getSizes";
     private static final String RESPONSE_FORMAT = "json";
-    private static final String API_KEY = "5423dbab63f23a62ca4a986e7cbb35e2";
+    private static final String API_KEY = "YOUR_API_KEY";
 
     private final FlickerApi client;
     private final Application app;
