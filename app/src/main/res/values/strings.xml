@@ -6,4 +6,6 @@
     <string name="unique_images">Unique Images: %1$d</string>
     <string name="board_size">Board Size: %1$d X %2$d</string>
     <string name="moveTracker">Move Number: %1$d</string>
+    <string name="winningMessage">YOU WON IN %1$d</string>
+    <string name="new_game">New Game</string>
 </resources>

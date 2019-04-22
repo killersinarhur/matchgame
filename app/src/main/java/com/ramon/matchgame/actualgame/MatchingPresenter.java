@@ -37,7 +37,7 @@ public class MatchingPresenter {
     public void matchMade() {
         model.incrementMatchMade();
         if (model.getNumofImages()==model.getNumOfMatchesMade()){
-            view.showGameWon();
+            view.showGameWon(model.getNumOfMoves());
         }
     }
 
@@ -46,6 +46,6 @@ public class MatchingPresenter {
 
         void initializeView(int boardSize, List<Photo> photo, int numOfMoves);
 
-        void showGameWon();
+        void showGameWon(int numOfMoves);
     }
 }

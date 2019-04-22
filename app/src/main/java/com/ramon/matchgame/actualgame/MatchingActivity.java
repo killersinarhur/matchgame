@@ -1,5 +1,6 @@
 package com.ramon.matchgame.actualgame;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -47,6 +48,17 @@ public class MatchingActivity extends AppCompatActivity implements MatchingPrese
         gameBoard.setLayoutManager(new GridLayoutManager(this, boardSize));
         adapter = new GameBoardAdapter(photo, presenter);
         gameBoard.setAdapter(adapter);
+    }
+
+    @Override
+    public void showGameWon(int numOfMoves) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(getString(R.string.winningMessage,numOfMoves));
+                alertDialogBuilder.setPositiveButton(getString(R.string.new_game),
+                        (arg0, arg1) -> finish());
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 
