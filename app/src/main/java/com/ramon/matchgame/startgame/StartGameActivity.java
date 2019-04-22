@@ -104,7 +104,7 @@ public class StartGameActivity extends AppCompatActivity implements StartGamePre
 
     @Override
     public void showErrorState() {
-        Toast.makeText(this,"error",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Something Went Wrong Try Again",Toast.LENGTH_LONG).show();
     }
 
     @Override

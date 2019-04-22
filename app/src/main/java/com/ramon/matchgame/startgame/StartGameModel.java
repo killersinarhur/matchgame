@@ -17,7 +17,7 @@ public class StartGameModel {
         this.pageNumber = pageNumber;
     }
 
-    public int pageNumber;
+    public int pageNumber=5;
     private int numOfImages = UniqueImages.SMALL;
     private double boardSize = 4;
 
