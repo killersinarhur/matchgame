@@ -8,8 +8,14 @@
     tools:context=".actualgame.MatchingActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/move_counter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/game_board"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
 </LinearLayout>

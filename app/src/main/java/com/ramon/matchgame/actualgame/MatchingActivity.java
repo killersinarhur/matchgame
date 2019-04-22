@@ -1,38 +1,50 @@
 package com.ramon.matchgame.actualgame;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.ramon.matchgame.R;
-import com.ramon.matchgame.webservice.flicker.model.FlikerResults;
+import com.ramon.matchgame.actualgame.gameviewholder.GameBoardAdapter;
+import com.ramon.matchgame.webservice.flicker.model.Photo;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.List;
 
-public class MatchingActivity extends AppCompatActivity {
-    public static final String FLICKER_RESULTS_KEY="FLICKER_RESULTS_KEY";
-    public static final String NUMBER_OF_IMAGES_KEY="NUMBER_OF_IMAGES_KEY";
-    public static final String BOARD_SIZE_KEY ="BOARD_SIZE_KEY";
+import butterknife.BindView;
+
+public class MatchingActivity extends AppCompatActivity implements MatchingPresenter.View {
+    public static final String FLICKER_RESULTS_KEY = "FLICKER_RESULTS_KEY";
+    public static final String NUMBER_OF_IMAGES_KEY = "NUMBER_OF_IMAGES_KEY";
+    public static final String BOARD_SIZE_KEY = "BOARD_SIZE_KEY";
+    private MatchingPresenter presenter;
+    @BindView(R.id.move_counter)
+    TextView moveTracker;
+    @BindView(R.id.game_board)
+    RecyclerView gameBoard;
+    private GameBoardAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching);
-        retreiveFromIntent(getIntent());
+        presenter = new MatchingPresenter(this, getIntent());
 
     }
 
-    private void retreiveFromIntent(Intent intent) {
-      flickerResults=  getFlickerData(intent.getStringExtra(FLICKER_RESULTS_KEY));
-       numofImages= intent.getIntExtra(NUMBER_OF_IMAGES_KEY,8);
-       boardSize= intent.getIntExtra(BOARD_SIZE_KEY,4);
 
+    @Override
+    public void incrementMoveCounter(int numOfMoves) {
+        moveTracker.setText(getString(R.string.moveTracker, numOfMoves));
     }
 
-    private FlikerResults getFlickerData(String stringExtra) {
-       FlikerResults flikerResults= new FlikerResults();
-        if(!StringUtils.isEmpty(stringExtra)){
-            flikerResults=
-        }
+    @Override
+    public void initializeView(int boardSize, List<Photo> photo) {
+        gameBoard.setLayoutManager(new GridLayoutManager(this,boardSize));
+        adapter= new GameBoardAdapter(photo,presenter);
+        gameBoard.setAdapter(adapter);
     }
+
+
 }
