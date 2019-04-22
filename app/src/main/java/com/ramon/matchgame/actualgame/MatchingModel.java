@@ -18,6 +18,8 @@ import static com.ramon.matchgame.actualgame.MatchingActivity.NUMBER_OF_IMAGES_K
 
 public class MatchingModel {
 
+    private int numOfMatchesMade;
+
     public MatchingModel(Intent intent, Gson gson) {
         retreiveFromIntent(intent, gson);
     }
@@ -101,5 +103,17 @@ public class MatchingModel {
         returnList.addAll(photo);
         Collections.shuffle(returnList);
         return returnList;
+    }
+
+    public int getNumOfMatchesMade() {
+        return numOfMatchesMade;
+    }
+
+    public void setNumOfMatchesMade(int numOfMatchesMade) {
+        this.numOfMatchesMade = numOfMatchesMade;
+    }
+
+    public void incrementMatchMade() {
+        numOfMatchesMade++;
     }
 }

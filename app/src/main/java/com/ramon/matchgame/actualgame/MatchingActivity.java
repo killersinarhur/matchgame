@@ -13,6 +13,7 @@ import com.ramon.matchgame.webservice.flicker.model.Photo;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MatchingActivity extends AppCompatActivity implements MatchingPresenter.View {
     public static final String FLICKER_RESULTS_KEY = "FLICKER_RESULTS_KEY";
@@ -29,8 +30,9 @@ public class MatchingActivity extends AppCompatActivity implements MatchingPrese
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching);
+        ButterKnife.bind(this);
         presenter = new MatchingPresenter(this, getIntent());
-
+        presenter.onViewCreated();
     }
 
 
@@ -40,9 +42,10 @@ public class MatchingActivity extends AppCompatActivity implements MatchingPrese
     }
 
     @Override
-    public void initializeView(int boardSize, List<Photo> photo) {
-        gameBoard.setLayoutManager(new GridLayoutManager(this,boardSize));
-        adapter= new GameBoardAdapter(photo,presenter);
+    public void initializeView(int boardSize, List<Photo> photo, int numOfMoves) {
+        moveTracker.setText(getString(R.string.moveTracker, numOfMoves));
+        gameBoard.setLayoutManager(new GridLayoutManager(this, boardSize));
+        adapter = new GameBoardAdapter(photo, presenter);
         gameBoard.setAdapter(adapter);
     }
 

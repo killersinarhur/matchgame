@@ -7,7 +7,7 @@ public class FlickerEndpoint {
         return "https://api.flickr.com/";
     }
 
-    public static String buildImageUrl(String farmId,String serverId,String photoId,String photoSecretId,String photoSize,String imageFormat ){
+    public static String buildImageUrl(Integer farmId, String serverId, String photoId, String photoSecretId, String photoSize, String imageFormat ){
         String url="https://farm" +
                 farmId +
                 ".staticflickr.com/" +

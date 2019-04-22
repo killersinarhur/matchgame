@@ -31,12 +31,21 @@ public class MatchingPresenter {
 
     public void onViewCreated() {
 
-        view.initializeView(model.getBoardSize(),model.getPhotoList());
+        view.initializeView(model.getBoardSize(),model.getPhotoList(),model.getNumOfMoves());
+    }
+
+    public void matchMade() {
+        model.incrementMatchMade();
+        if (model.getNumofImages()==model.getNumOfMatchesMade()){
+            view.showGameWon();
+        }
     }
 
     public interface View {
         void incrementMoveCounter(int numOfMoves);
 
-        void initializeView(int boardSize, List<Photo> photo);
+        void initializeView(int boardSize, List<Photo> photo, int numOfMoves);
+
+        void showGameWon();
     }
 }
